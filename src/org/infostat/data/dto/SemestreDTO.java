@@ -23,8 +23,8 @@ public class SemestreDTO implements Serializable {
     private String sigle;
     private String status;
     private String description;
-    private DateDTO startdate;
-    private DateDTO enddate;
+    private DateDTO startdate = new DateDTO();
+    private DateDTO enddate = new DateDTO();
 
     public SemestreDTO() {
     }

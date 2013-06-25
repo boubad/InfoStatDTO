@@ -21,15 +21,15 @@ public class GroupeEventDTO implements Serializable {
     private Integer version;
     private Integer affectationenseignantid;
     private String genre;
-    private DateDTO date;
+    private DateDTO date = new DateDTO();
     private String nom;
-    private DateDTO starttime;
-    private DateDTO endtime;
+    private DateDTO starttime = new DateDTO();
+    private DateDTO endtime = new DateDTO();
     private Float coefficient = new Float(1.0f);
     private String status;
     private String description;
     private String location;
-
+    private boolean createnotes = false;
     //
     public GroupeEventDTO() {
     }
@@ -41,6 +41,22 @@ public class GroupeEventDTO implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+    @XmlAttribute
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    @XmlAttribute
+    public boolean isCreatenotes() {
+        return createnotes;
+    }
+
+    public void setCreatenotes(boolean createnotes) {
+        this.createnotes = createnotes;
     }
 
     @XmlAttribute
