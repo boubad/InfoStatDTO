@@ -4,31 +4,29 @@
  */
 package org.infostat.data.dto;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.Objects;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author boubad
  */
-@XmlRootElement(name = "matiere")
-public class MatiereDTO implements Serializable {
+@XmlRootElement(name = "modules")
+public class ModuleDTO implements Serializable {
 
     private static final long serialVersionUID = 1L;
+    //
     private Integer id;
     private Integer version;
-    private Integer uniteid;
-    private Integer order;
-    private Integer[] moduleids;
-    private Float coefficient;
     private String sigle;
     private String nom;
-    private String status;
     private String description;
+    private Integer[] matiereids;
+    //
 
-    public MatiereDTO() {
+    public ModuleDTO() {
     }
 
     @XmlAttribute
@@ -49,39 +47,6 @@ public class MatiereDTO implements Serializable {
         this.version = version;
     }
 
-    @XmlAttribute
-    public Integer getUniteid() {
-        return uniteid;
-    }
-
-    public void setUniteid(Integer uniteid) {
-        this.uniteid = uniteid;
-    }
-
-    @XmlAttribute
-    public Integer getOrder() {
-        return order;
-    }
-
-    public void setOrder(Integer order) {
-        this.order = order;
-    }
-    public Integer[] getModuleids() {
-        return moduleids;
-    }
-
-    public void setModuleids(Integer[] moduleids) {
-        this.moduleids = moduleids;
-    }
-
-    public Float getCoefficient() {
-        return coefficient;
-    }
-
-    public void setCoefficient(Float coefficient) {
-        this.coefficient = coefficient;
-    }
-
     public String getSigle() {
         return sigle;
     }
@@ -98,15 +63,6 @@ public class MatiereDTO implements Serializable {
         this.nom = nom;
     }
 
-    @XmlAttribute
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -115,12 +71,19 @@ public class MatiereDTO implements Serializable {
         this.description = description;
     }
 
+    public Integer[] getMatiereids() {
+        return matiereids;
+    }
+
+    public void setMatiereids(Integer[] matiereids) {
+        this.matiereids = matiereids;
+    }
+
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 17 * hash + Objects.hashCode(this.id);
-        hash = 17 * hash + Objects.hashCode(this.uniteid);
-        hash = 17 * hash + Objects.hashCode(this.sigle);
+        int hash = 7;
+        hash = 61 * hash + Objects.hashCode(this.id);
+        hash = 61 * hash + Objects.hashCode(this.sigle);
         return hash;
     }
 
@@ -132,11 +95,8 @@ public class MatiereDTO implements Serializable {
         if (getClass() != obj.getClass()) {
             return false;
         }
-        final MatiereDTO other = (MatiereDTO) obj;
+        final ModuleDTO other = (ModuleDTO) obj;
         if (!Objects.equals(this.id, other.id)) {
-            return false;
-        }
-        if (!Objects.equals(this.uniteid, other.uniteid)) {
             return false;
         }
         if (!Objects.equals(this.sigle, other.sigle)) {
@@ -147,6 +107,6 @@ public class MatiereDTO implements Serializable {
 
     @Override
     public String toString() {
-        return this.sigle;
+        return "ModuleDTO{" + "id=" + id + ", version=" + version + ", sigle=" + sigle + ", nom=" + nom + ", description=" + description + '}';
     }
 }

@@ -3,8 +3,11 @@
  * and open the template in the editor.
  */
 package org.infostat.data.dto;
+
 import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Objects;
 import javax.xml.bind.annotation.XmlAttribute;
 
@@ -12,18 +15,19 @@ import javax.xml.bind.annotation.XmlAttribute;
  *
  * @author boubad
  */
-@XmlRootElement(name="datetime")
+@XmlRootElement(name = "datetime")
 public class DateDTO implements Serializable {
-    private static final long serialVersionUID = 1L;
-    private Integer year = new Integer(0);
-    private Integer month = new Integer(0);;
-    private Integer day = new Integer(0);;
-    private Integer hour = new Integer(0);;
-    private Integer minute = new Integer(0);;
-    private Integer second = new Integer(0);;
 
+    private static final long serialVersionUID = 1L;
+    private Integer year;
+    private Integer month;
+    private Integer day;
+    private Integer hour;
+    private Integer minute;
+    private Integer second;
     //
     public DateDTO() {
+        fromDate(new Date());
     }
 
     public DateDTO(int year, int month, int day) {
@@ -40,8 +44,12 @@ public class DateDTO implements Serializable {
         this.minute = minute;
         this.second = second;
     }
-    
+
+    public DateDTO(Date p) {
+        this.fromDate(p);
+    }
     //
+
     @XmlAttribute
     public Integer getYear() {
         return year;
@@ -50,15 +58,17 @@ public class DateDTO implements Serializable {
     public void setYear(Integer year) {
         this.year = year;
     }
-     @XmlAttribute
+
+    @XmlAttribute
     public Integer getMonth() {
         return month;
     }
-     
+
     public void setMonth(Integer month) {
         this.month = month;
     }
-     @XmlAttribute
+
+    @XmlAttribute
     public Integer getDay() {
         return day;
     }
@@ -66,7 +76,8 @@ public class DateDTO implements Serializable {
     public void setDay(Integer day) {
         this.day = day;
     }
-     @XmlAttribute
+
+    @XmlAttribute
     public Integer getHour() {
         return hour;
     }
@@ -74,15 +85,17 @@ public class DateDTO implements Serializable {
     public void setHour(Integer hour) {
         this.hour = hour;
     }
-     @XmlAttribute
+
+    @XmlAttribute
     public Integer getMinute() {
         return minute;
     }
-     
+
     public void setMinute(Integer minute) {
         this.minute = minute;
     }
-     @XmlAttribute
+
+    @XmlAttribute
     public Integer getSecond() {
         return second;
     }
@@ -90,6 +103,29 @@ public class DateDTO implements Serializable {
     public void setSecond(Integer second) {
         this.second = second;
     }
+
+    public Date toDate() {
+        GregorianCalendar cal =
+                (GregorianCalendar) GregorianCalendar.getInstance();
+        cal.set(getYear(), getMonth() - 1, getDay(),
+                getHour(), getMinute(), getSecond());
+        Date pRet = cal.getTime();
+        return pRet;
+    }// convertDate
+
+    public void fromDate(Date p) {
+        if (p != null) {
+            GregorianCalendar cal =
+                    (GregorianCalendar) GregorianCalendar.getInstance();
+            cal.setTime(p);
+            this.year = cal.get(GregorianCalendar.YEAR);
+            this.month = cal.get(GregorianCalendar.MONTH + 1);
+            this.day = cal.get(GregorianCalendar.DAY_OF_MONTH);
+            this.hour = cal.get(GregorianCalendar.HOUR);
+            this.minute = cal.get(GregorianCalendar.MINUTE);
+            this.second = cal.get(GregorianCalendar.SECOND);
+        }
+    }// convertDate
 
     @Override
     public int hashCode() {
@@ -132,8 +168,4 @@ public class DateDTO implements Serializable {
         }
         return true;
     }
-
-    
-   
-    
 }// class DateDTO
