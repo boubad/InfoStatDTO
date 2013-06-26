@@ -12,26 +12,23 @@ import javax.xml.bind.annotation.XmlRootElement;
  *
  * @author boubad
  */
-@XmlRootElement(name = "etudiant-events")
-public class EtudiantEventsList implements Serializable {
+@XmlRootElement(name = "annees")
+public class AnneesList implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    private String operation = "maintains";
-    private EtudiantEventDTO[] events;
+    private String operation;
+    private AnneeDTO[] annees;
 
-    public EtudiantEventsList() {
+    public AnneesList() {
     }
 
-    public EtudiantEventsList(EtudiantEventDTO[] oList) {
-        this.events = oList;
+    public AnneesList(AnneeDTO[] annees) {
+        this.annees = annees;
     }
 
-    public EtudiantEventDTO[] getEvents() {
-        return events;
-    }
-
-    public void setEvents(EtudiantEventDTO[] events) {
-        this.events = events;
+    public AnneesList(String operation, AnneeDTO[] annees) {
+        this.operation = operation;
+        this.annees = annees;
     }
 
     @XmlAttribute
@@ -41,5 +38,13 @@ public class EtudiantEventsList implements Serializable {
 
     public void setOperation(String operation) {
         this.operation = operation;
+    }
+
+    public AnneeDTO[] getAnnees() {
+        return annees;
+    }
+
+    public void setAnnees(AnneeDTO[] annees) {
+        this.annees = annees;
     }
 }
